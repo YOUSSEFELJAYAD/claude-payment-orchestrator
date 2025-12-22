@@ -1,0 +1,14 @@
+3DS COMPONENT SCAFFOLD
+---------------------------------------------------
+TYPE: Modal / Iframe
+---------------------------------------------------
+PROPS:
+- acsUrl: {{url}}
+- onComplete: Callback
+- onFailure: Callback
+---------------------------------------------------
+SECURITY:
+- Sandbox: Enabled (Forms, Scripts, Same-Origin)
+- Origin Check: Strict
+---------------------------------------------------
+LAYOUT: Center Overlay, 600x400

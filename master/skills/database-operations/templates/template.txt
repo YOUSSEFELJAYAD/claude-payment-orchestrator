@@ -1,0 +1,13 @@
+QUERY OPTIMIZATION
+---------------------------------------------------
+GOAL: {{goal}}
+TARGET TABLE: {{table}}
+---------------------------------------------------
+INDEXING STRATEGY:
+- Column: {{column}} (Cardinality: High/Low)
+- Type: B-Tree / Hash
+---------------------------------------------------
+RAW SQL:
+SELECT * FROM {{table}}
+WHERE {{condition}}
+LIMIT 100

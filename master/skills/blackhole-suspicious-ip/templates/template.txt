@@ -1,0 +1,8 @@
+NETWORK DENY RULE
+---------------------------------------------------
+TARGET: {{ip_cidr}}
+REASON: {{reason}}
+METHOD: NACL / Route Table
+---------------------------------------------------
+EXPIRY: {{expiry_time}} (Optional)
+AUTOMATION: Manual / Lambda

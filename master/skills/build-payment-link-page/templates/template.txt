@@ -1,0 +1,10 @@
+PAGE LAYOUT
+---------------------------------------------------
+TYPE: Payment Link / Checkout
+---------------------------------------------------
+STRUCTURE:
+- Header: Logo (Centered Mobile, Left Desktop)
+- Body: 1-Col (Mobile) / 2-Col (Desktop)
+- Footer: Security Badges
+---------------------------------------------------
+THEME: Dynamic (Merchant Config)

@@ -1,0 +1,16 @@
+API ENDPOINT
+---------------------------------------------------
+METHOD: {{method}} (GET/POST/PUT/DELETE)
+PATH: /api/v1/{{resource}}
+---------------------------------------------------
+AUTH: Bearer Token
+IDEMPOTENCY: Required (Header: Idempotency-Key)
+---------------------------------------------------
+INPUT SCHEMA:
+{{json_schema}}
+---------------------------------------------------
+SUCCESS RESPONSE (200):
+{
+  "success": true,
+  "data": ...
+}

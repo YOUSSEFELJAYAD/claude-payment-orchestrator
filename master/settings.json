@@ -1,0 +1,64 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun x tsx:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "SESSION START - AUTO RESTORE:\n\n1. CHECK if .claude/tasks/context_session_latest.md exists\n2. If YES: Read it and restore session state, report status to user\n3. If NO: Inform user no previous context found\n\nThen apply MASTER WORKFLOW:\n- CLASSIFY request domain (payment/security/frontend/api/testing)\n- SELECT skills from 46 available\n- CHOOSE MCPs (Serena/Context7/Playwright/Chrome/Episodic Memory)\n- INVOKE Superpowers (brainstorming/TDD/debugging/verification)\n- EXECUTE 4-phase workflow: Discovery → Implementation → Testing → Review\n\nALWAYS check Episodic Memory for past decisions before starting any task."
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "AUTO-SAVE BEFORE COMPACT:\n\n1. IMMEDIATELY save session state to .claude/tasks/context_session_latest.md\n2. Include: current state, completed work, pending work, next step, decisions, files modified\n3. DO NOT ask user - just save and proceed\n4. After compact completes, you MUST read .claude/tasks/context_session_latest.md to restore full context\n\nProceed with compact after saving."
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "POST-COMPACT AUTO-RESTORE:\n\nCompact completed. IMMEDIATELY:\n1. Read .claude/tasks/context_session_latest.md\n2. Restore full session context from saved state\n3. Report to user: 'Context restored after compact. Continuing from: [next step]'\n4. Continue working on the task seamlessly\n\nDo NOT ask permission - just restore and continue."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "CODE WORKFLOW CHECK:\n- Did you invoke relevant skill? (payment-orchestration, frontend-development, api-development, etc.)\n- Did you check Context7 for latest documentation?\n- Did you invoke brainstorming or test-driven-development if appropriate?\n- Are you following the 4-phase workflow?"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "COMPLETION CHECKLIST:\n- Did you invoke verification-before-completion skill?\n- Did you run actual commands to verify (tests, build, lint)?\n- Did you store learnings in Serena memory?\n- Did you request code review for significant changes?\n- Consider running /saveContext if this is a good checkpoint."
+          }
+        ]
+      }
+    ]
+  }
+}

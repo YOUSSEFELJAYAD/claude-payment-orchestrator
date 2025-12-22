@@ -1,0 +1,9 @@
+MOCK RESPONSE GENERATED
+---------------------------------------------------
+TRIGGER: Amount ending in .{{cents}}
+SIMULATED STATUS: {{status}}
+---------------------------------------------------
+PAYLOAD:
+{{payload_json}}
+---------------------------------------------------
+LATENCY ADDED: {{latency_ms}}ms

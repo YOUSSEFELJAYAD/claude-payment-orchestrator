@@ -1,0 +1,12 @@
+OBSERVABILITY DASHBOARD
+---------------------------------------------------
+TOOL: Grafana / Prometheus
+FOCUS: PSP Performance
+---------------------------------------------------
+SLO:
+- Availability: 99.95%
+- Latency (P99): < 2000ms
+---------------------------------------------------
+ALERTS:
+- PagerDuty: Latency Spike > 3s
+- Slack: Error Rate > 1%

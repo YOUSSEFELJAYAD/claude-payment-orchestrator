@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Runtime
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+*.tsbuildinfo
+
+# Lock files (keep bun.lock if using bun)
+package-lock.json
+yarn.lock

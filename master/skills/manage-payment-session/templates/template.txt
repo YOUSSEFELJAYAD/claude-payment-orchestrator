@@ -1,0 +1,8 @@
+SESSION CREATED
+---------------------------------------------------
+TOKEN: {{token}}
+ORDER ID: {{order_id}}
+EXPIRES AT: {{expiry_iso}} ({{ttl_mins}} mins)
+---------------------------------------------------
+STORAGE: Redis Key `session:{{token}}`
+STATUS: ACTIVE

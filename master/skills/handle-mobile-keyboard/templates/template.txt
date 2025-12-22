@@ -1,0 +1,10 @@
+INPUT COMPONENT
+---------------------------------------------------
+FIELD TYPE: {{type}}
+---------------------------------------------------
+ATTRIBUTES:
+- inputMode: {{inputMode}}
+- autoComplete: {{autoComplete}}
+- pattern: {{pattern}}
+---------------------------------------------------
+DEVICE TARGET: iOS / Android

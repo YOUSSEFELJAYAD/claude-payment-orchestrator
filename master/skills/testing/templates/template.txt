@@ -1,0 +1,13 @@
+TEST PLAN
+---------------------------------------------------
+FEATURE: {{feature_name}}
+TYPE: Unit / Integration / E2E
+---------------------------------------------------
+SCENARIOS:
+1. Happy Path: {{description}}
+2. Edge Case: {{description}} (e.g. invalid input)
+3. Error State: {{description}} (e.g. network failure)
+---------------------------------------------------
+DATA SETUP:
+- User: {{user_role}}
+- Config: {{config_state}}

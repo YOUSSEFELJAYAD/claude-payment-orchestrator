@@ -1,0 +1,13 @@
+VALIDATION COMPONENT
+---------------------------------------------------
+INPUT: Credit Card Number
+LOGIC: Luhn + Regex
+---------------------------------------------------
+STATES:
+- Idle: Neutral Border
+- Valid: Green Border + Check Icon
+- Invalid: Red Border + Error Message (below)
+---------------------------------------------------
+BRAND DETECTION:
+- Prefix 4 -> Visa
+- Prefix 5 -> Mastercard

@@ -1,0 +1,11 @@
+ANIMATION COMPONENT
+---------------------------------------------------
+TRIGGER: State Change ({{trigger_state}})
+LIBRARY: Framer Motion
+---------------------------------------------------
+STAGES:
+1. Entry: {{entry_anim}}
+2. Active: {{active_anim}}
+3. Exit: {{exit_anim}}
+---------------------------------------------------
+ACCESSIBILITY: prefers-reduced-motion check

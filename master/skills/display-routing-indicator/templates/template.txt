@@ -1,0 +1,9 @@
+ROUTING COMPONENT
+---------------------------------------------------
+STRATEGY: {{strategy}}
+VISIBILITY: Admin / Merchant Dashboard
+---------------------------------------------------
+ICON: Lucide/{{icon_name}}
+LABEL: {{label_text}}
+---------------------------------------------------
+TOOLTIP: {{explanation}}

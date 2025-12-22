@@ -1,0 +1,9 @@
+ADAPTER: Mastercard Gateway (MPGS)
+---------------------------------------------------
+VERSION: 50+
+AUTH: Basic (merchant.{{mid}})
+---------------------------------------------------
+FLOW:
+1. Client: Create Session -> Tokenize.
+2. Server: PUT /transaction/{id} using Session ID.
+3. Server: Handle Webhook for async updates.

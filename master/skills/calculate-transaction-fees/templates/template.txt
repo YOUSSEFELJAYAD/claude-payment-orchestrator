@@ -1,0 +1,12 @@
+FEE CALCULATION
+---------------------------------------------------
+MODEL: {{model_type}}
+GROSS AMOUNT: {{gross_formatted}}
+---------------------------------------------------
+BREAKDOWN:
+- Interchange: {{ic_fee}}
+- Scheme: {{scheme_fee}}
+- Markup: {{markup_fee}}
+---------------------------------------------------
+TOTAL FEE: {{total_fee}}
+NET SETTLEMENT: {{net_amount}}

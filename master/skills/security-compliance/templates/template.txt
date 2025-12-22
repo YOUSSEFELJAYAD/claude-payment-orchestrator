@@ -1,0 +1,10 @@
+SECURITY POLICY
+---------------------------------------------------
+POLICY: {{policy_name}} (e.g. Data Retention)
+OWNER: CISO
+REVIEW DATE: {{date}}
+---------------------------------------------------
+RULES:
+1. PANs must be truncated (First 6, Last 4).
+2. Logs must be retained for 1 year.
+3. Access reviews must occur quarterly.

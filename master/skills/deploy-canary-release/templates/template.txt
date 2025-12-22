@@ -1,0 +1,12 @@
+KUBERNETES / ISTIO MANIFEST
+---------------------------------------------------
+SERVICE: {{service_name}}
+STRATEGY: Canary
+---------------------------------------------------
+SUBSETS:
+- v1 (Stable)
+- v2 (Canary)
+---------------------------------------------------
+TRAFFIC SPLIT:
+- v1: {{weight_stable}}%
+- v2: {{weight_canary}}%

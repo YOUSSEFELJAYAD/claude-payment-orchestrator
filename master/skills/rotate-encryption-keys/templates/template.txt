@@ -1,0 +1,10 @@
+KEY ROTATION POLICY
+---------------------------------------------------
+SCOPE: Data Encryption Keys (DEK) & KEK
+FREQUENCY: Every 365 Days
+AUTOMATION: AWS KMS Auto-Rotation
+---------------------------------------------------
+PROCEDURE:
+1. Enable Auto-Rotation on CMK.
+2. Monitor CloudWatch for Rotation Events.
+3. For Asymmetric Keys: Manual Generation + App Config Update.

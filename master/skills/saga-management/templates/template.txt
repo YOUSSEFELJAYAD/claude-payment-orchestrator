@@ -1,0 +1,12 @@
+SAGA DEFINITION
+---------------------------------------------------
+NAME: {{saga_name}}
+TRIGGER: {{trigger_event}}
+---------------------------------------------------
+STEPS:
+1. {{step_1_name}} (Compensable: Yes/No)
+2. {{step_2_name}}
+...
+---------------------------------------------------
+TIMEOUT: {{timeout_ms}}
+RETRY POLICY: Exponential Backoff (3x)

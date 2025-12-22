@@ -1,0 +1,12 @@
+ORCHESTRATION CONFIG
+---------------------------------------------------
+RETRIES: {{max_retries}} (Default: 3)
+FAILOVER: Enabled / Disabled
+---------------------------------------------------
+MODULES:
+- Fraud: [On/Off]
+- Ledger: [Async/Sync]
+---------------------------------------------------
+TIMEOUTS:
+- Gateway: 10s
+- 3DS Session: 15m

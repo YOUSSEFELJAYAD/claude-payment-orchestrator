@@ -1,0 +1,12 @@
+ROUTING EVALUATION COMPLETE
+---------------------------------------------------
+INPUT: {{amount}} {{currency}} | BIN: {{bin}}
+---------------------------------------------------
+SELECTED CHAIN:
+1. {{primary_psp}} (Rule: {{primary_rule_name}})
+2. {{failover_psp_1}}
+3. {{failover_psp_2}}
+---------------------------------------------------
+LOGIC TRACE:
+- Rule "{{rule_1}}" matched? {{match_1}}
+- Rule "{{rule_2}}" matched? {{match_2}}

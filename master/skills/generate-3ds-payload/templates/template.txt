@@ -1,0 +1,12 @@
+SUCCESS: Generated 3DS Payload
+---------------------------------------------------
+TRANSACTION_ID: {{transaction_id}}
+CHANNEL: {{channel}}
+---------------------------------------------------
+PAYLOAD:
+{{payload_json}}
+---------------------------------------------------
+VALIDATION CHECKS:
+[x] Mandatory fields (order, sourceOfFunds)
+[x] Browser data included (Risk Analysis Optimized)
+[x] 3DS 2.0 specific fields

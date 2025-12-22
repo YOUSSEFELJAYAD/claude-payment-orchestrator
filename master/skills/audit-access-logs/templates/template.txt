@@ -1,0 +1,11 @@
+SECURITY AUDIT REPORT
+---------------------------------------------------
+PERIOD: {{start_date}} to {{end_date}}
+LOG SOURCES: CloudTrail, VPC Flow, ALB
+---------------------------------------------------
+ANOMALIES DETECTED:
+- Failed Logins: {{failed_login_count}}
+- Root Access: {{root_access_events}}
+- Unauthorized API Calls: {{denied_calls}}
+---------------------------------------------------
+INTEGRITY CHECK: Pass / Fail

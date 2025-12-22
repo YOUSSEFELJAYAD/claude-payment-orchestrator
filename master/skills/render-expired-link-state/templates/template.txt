@@ -1,0 +1,10 @@
+ERROR PAGE
+---------------------------------------------------
+TYPE: Expired / Invalid
+---------------------------------------------------
+ICON: Clock / Broken Link
+TITLE: Link Expired
+MESSAGE: Friendly explanation (Security/Timeout)
+CTA: Support / Home
+---------------------------------------------------
+LAYOUT: Centered Card

@@ -1,0 +1,12 @@
+REFUND DECISION
+---------------------------------------------------
+CURRENT STATUS: {{status}}
+ACTION TYPE: {{action}} (Void/Refund)
+---------------------------------------------------
+VALIDATION:
+- Requested: {{amount}}
+- Available: {{available}}
+- Valid: {{is_valid}}
+---------------------------------------------------
+API CALL: {{api_method}}
+IDEMPOTENCY KEY: {{idempotency_key}}

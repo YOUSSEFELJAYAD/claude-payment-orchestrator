@@ -1,0 +1,11 @@
+DIAGNOSIS REPORT
+---------------------------------------------------
+GATEWAY CODE: {{gateway_code}}
+ACQUIRER CODE: {{acqs_code}}
+---------------------------------------------------
+MAPPED STATUS: {{mapped_status}}
+USER MESSAGE: {{user_message}}
+ACTION REQUIRED: {{action}}
+---------------------------------------------------
+RAW ERROR (if applicable):
+{{raw_error}}

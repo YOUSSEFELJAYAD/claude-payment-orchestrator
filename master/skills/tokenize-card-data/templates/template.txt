@@ -1,0 +1,8 @@
+TOKENIZATION SUCCESS
+---------------------------------------------------
+TOKEN ID: {{token}}
+CARD: {{bin}}******{{last4}}
+ALGO: AES-256-GCM
+---------------------------------------------------
+VAULT STATUS: Stored encrypted.
+NON-PCI SCOPE: Safe to return.

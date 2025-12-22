@@ -1,0 +1,15 @@
+SERVICE INTERFACE: Cybersource
+---------------------------------------------------
+CREDENTIALS:
+- Merchant ID
+- Key ID
+- Secret Key (Base64)
+---------------------------------------------------
+METHODS:
+- authorize(amount, currency, card, ref_id)
+- capture(auth_id, amount, currency)
+- void(auth_id)
+- refund(capture_id, amount)
+---------------------------------------------------
+TIMEOUT: 10s
+RETRY: 3x (on 502/503)

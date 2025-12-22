@@ -1,0 +1,11 @@
+SCOPE VERIFICATION REPORT
+---------------------------------------------------
+DATE: {{date}}
+TESTER: {{tester_name}}
+---------------------------------------------------
+TARGETS:
+1. Public -> Isolated (Database): Pass/Fail
+2. Office -> Isolated: Pass/Fail
+3. Isolated -> Internet: Pass/Fail
+---------------------------------------------------
+CONCLUSION: Segmentation is [EFFECTIVE / INEFFECTIVE]

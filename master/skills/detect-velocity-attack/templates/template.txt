@@ -1,0 +1,11 @@
+FRAUD RULE DEFINITION
+---------------------------------------------------
+NAME: {{rule_name}}
+DIMENSION: {{dimension}} (IP, Card, Device)
+WINDOW: {{window_seconds}}s
+THRESHOLD: {{max_count}}
+---------------------------------------------------
+ACTION:
+- Soft Decline (Try again later)
+- Hard Block (Blacklist IP)
+- 3DS Challenge (Force auth)

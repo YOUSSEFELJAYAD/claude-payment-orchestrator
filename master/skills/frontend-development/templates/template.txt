@@ -1,0 +1,13 @@
+COMPONENT: {{component_name}}
+---------------------------------------------------
+TYPE: Atom / Molecule / Organism
+PROPS:
+- {{prop_name}}: {{prop_type}}
+---------------------------------------------------
+IMPORTS:
+- "lucide-react" (Icons)
+- "@/components/ui/..."
+---------------------------------------------------
+ACCESSIBILITY:
+- Role: {{aria_role}}
+- TabIndex: 0

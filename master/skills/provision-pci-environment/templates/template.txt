@@ -1,0 +1,14 @@
+INFRASTRUCTURE AS CODE
+---------------------------------------------------
+TYPE: Terraform / CloudFormation
+COMPONENT: Network (VPC)
+---------------------------------------------------
+CIDR: {{vpc_cidr}}
+SUBNETS:
+- Public: {{public_subnets}}
+- Private: {{private_subnets}}
+- Isolated: {{isolated_subnets}}
+---------------------------------------------------
+TAGS:
+- Compliance: PCI-DSS
+- Environment: {{env}}

@@ -1,0 +1,12 @@
+WAF CONFIGURATION
+---------------------------------------------------
+PLATFORM: AWS WAFv2
+SCOPE: Regional (ALB) / Global (CloudFront)
+---------------------------------------------------
+MANAGED RULES:
+- CommonRuleSet
+- SQLiRuleSet
+---------------------------------------------------
+CUSTOM RULES:
+- RateLimit: {{rate_limit}} req/5min
+- GeoBlock: {{blocked_countries}}

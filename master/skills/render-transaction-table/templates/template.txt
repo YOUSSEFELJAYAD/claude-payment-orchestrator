@@ -1,0 +1,12 @@
+DATA TABLE COMPONENT
+---------------------------------------------------
+LIBRARY: TanStack Table v8 + Shadcn UI
+---------------------------------------------------
+COLUMNS:
+- ID (Hidden)
+- Date (Sortable)
+- Status (Badge)
+- Amount (Sortable, Right Align)
+- Actions (Dropdown)
+---------------------------------------------------
+FEATURES: Pagination, Sorting, Row Selection

@@ -1,0 +1,14 @@
+PENETRATION TEST REPORT
+---------------------------------------------------
+DATE: {{date}}
+TARGET: {{target_url}}
+---------------------------------------------------
+FINDINGS:
+1. High: {{vuln_name}} (CVSS {{score}})
+   - Description: ...
+   - PoC: ...
+   - Remediation: ...
+
+2. Medium: ...
+---------------------------------------------------
+EXECUTIVE SUMMARY: Risk Level [LOW/MED/HIGH]

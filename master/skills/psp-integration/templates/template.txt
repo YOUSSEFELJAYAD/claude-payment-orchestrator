@@ -1,0 +1,12 @@
+PSP ADAPTER TEMPLATE
+---------------------------------------------------
+NAME: {{provider_name}}
+DOCS: {{api_docs_url}}
+---------------------------------------------------
+MAPPING:
+- Auth Payload: ...
+- Capture Payload: ...
+---------------------------------------------------
+ERROR CODES:
+- "Insufficient Funds" -> DECLINED_FUNDS
+- "Fraud Detect" -> DECLINED_FRAUD

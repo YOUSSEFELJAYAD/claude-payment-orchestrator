@@ -1,0 +1,12 @@
+WEBHOOK VERIFICATION
+---------------------------------------------------
+SOURCE IP: {{source_ip}}
+TIMESTAMP: {{timestamp}} (Delta: {{delta}}s)
+---------------------------------------------------
+SIGNATURE CHECK:
+- Received: {{received_sig}}
+- Computed: {{computed_sig}}
+- MATCH: {{is_match}}
+---------------------------------------------------
+RESULT: {{status}}
+Action: {{action}}

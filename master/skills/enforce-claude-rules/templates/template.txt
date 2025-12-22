@@ -1,0 +1,15 @@
+# CLAUDE.md
+
+## Environment
+- OS: {{os}}
+- Shell: {{shell}}
+
+## Commands
+- Build: {{build_cmd}}
+- Test: {{test_cmd}}
+- Lint: {{lint_cmd}}
+
+## Coding Standards
+- Language: {{language}}
+- Framework: {{framework}}
+- Formatting: {{formatting_style}}

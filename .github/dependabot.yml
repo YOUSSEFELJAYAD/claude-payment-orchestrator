@@ -1,0 +1,247 @@
+# Dependabot Configuration
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+
+updates:
+  # ============================================
+  # NPM Dependencies
+  # ============================================
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"
+    reviewers:
+      - "YOUSSEFELJAYAD"
+
+    # Grouping Strategy - Reduces PR noise
+    groups:
+      # Production dependencies grouped by category
+      react-ecosystem:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-hook-form"
+          - "@types/react*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      nextjs:
+        patterns:
+          - "next"
+          - "@next/*"
+          - "eslint-config-next"
+        update-types:
+          - "minor"
+          - "patch"
+
+      typescript-eslint:
+        patterns:
+          - "typescript"
+          - "@typescript-eslint/*"
+          - "eslint"
+          - "eslint-*"
+          - "@eslint/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      testing:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+          - "jest"
+          - "@jest/*"
+          - "@types/jest"
+          - "playwright"
+          - "@playwright/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      ui-components:
+        patterns:
+          - "@radix-ui/*"
+          - "tailwindcss"
+          - "tailwind-*"
+          - "@tailwindcss/*"
+          - "class-variance-authority"
+          - "clsx"
+          - "lucide-react"
+        update-types:
+          - "minor"
+          - "patch"
+
+      validation:
+        patterns:
+          - "zod"
+          - "@hookform/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      state-management:
+        patterns:
+          - "zustand"
+          - "@tanstack/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      database:
+        patterns:
+          - "prisma"
+          - "@prisma/*"
+          - "drizzle-*"
+          - "pg"
+          - "@types/pg"
+        update-types:
+          - "minor"
+          - "patch"
+
+      security:
+        patterns:
+          - "jose"
+          - "bcrypt*"
+          - "@auth/*"
+          - "next-auth"
+        update-types:
+          - "minor"
+          - "patch"
+
+      dev-tools:
+        patterns:
+          - "prettier"
+          - "husky"
+          - "lint-staged"
+          - "@types/*"
+        exclude-patterns:
+          - "@types/react*"
+          - "@types/node"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # All other minor/patch updates
+      minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "react*"
+          - "next*"
+          - "typescript*"
+          - "@typescript-eslint/*"
+          - "eslint*"
+          - "vitest*"
+          - "jest*"
+          - "playwright*"
+          - "@radix-ui/*"
+          - "tailwind*"
+          - "zod"
+          - "zustand"
+          - "prisma*"
+          - "@prisma/*"
+
+    # Version Strategy
+    versioning-strategy: increase
+
+    # Ignore rules for known breaking changes
+    ignore:
+      # Ignore major versions - review manually
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      # Specific packages with known issues
+      - dependency-name: "node"
+        versions: [">=23.0.0"]
+
+  # ============================================
+  # GitHub Actions
+  # ============================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "ci/cd"
+      - "dependencies"
+      - "automated"
+    reviewers:
+      - "YOUSSEFELJAYAD"
+
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ============================================
+  # Docker (if applicable)
+  # ============================================
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+    labels:
+      - "docker"
+      - "dependencies"
+      - "automated"
+    reviewers:
+      - "YOUSSEFELJAYAD"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # ============================================
+  # Pip/Python (for any Python scripts)
+  # ============================================
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps-py"
+      include: "scope"
+    labels:
+      - "python"
+      - "dependencies"
+      - "automated"
+    reviewers:
+      - "YOUSSEFELJAYAD"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]

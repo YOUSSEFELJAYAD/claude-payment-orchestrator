@@ -1,0 +1,8 @@
+TOAST ACTION
+---------------------------------------------------
+TYPE: {{type}}
+MESSAGE: {{message}}
+---------------------------------------------------
+LIBRARY: Sonner
+POSITION: Bottom-Right
+RICH COLORS: True

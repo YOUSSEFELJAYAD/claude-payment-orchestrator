@@ -1,0 +1,14 @@
+REACT COMPONENT SCAFFOLD
+---------------------------------------------------
+COMPONENT: {{name}}
+LIBRARY: Shadcn UI + RHF
+---------------------------------------------------
+SCHEMA:
+{{schema_definition}}
+---------------------------------------------------
+FIELDS:
+- Card Number (Masked)
+- Expiry (MM/YY)
+- CVC (Numeric)
+---------------------------------------------------
+VALIDATION STRATEGY: Zod Resolver
