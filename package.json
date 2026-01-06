@@ -1,0 +1,65 @@
+{
+  "name": "@youssefeljayad/claude-payment-orchestrator",
+  "version": "1.1.0",
+  "description": "Comprehensive Claude Code plugin for payment systems development with 18 specialized agents, 49 skills, 3-tier thinking system, and full MCP integration",
+  "main": "master/settings.json",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-config.cjs",
+    "test": "bun test",
+    "lint": "markdownlint-cli2 '**/*.md' --ignore node_modules",
+    "count": "echo \"Agents: $(ls -1 master/agents/*.md | wc -l)\" && echo \"Skills: $(find master/skills -name 'SKILL.md' | wc -l)\" && echo \"Commands: $(ls -1 master/commands/*.md | wc -l)\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUSSEFELJAYAD/mcp-config-master.git"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "anthropic",
+    "ai",
+    "payment",
+    "pci-dss",
+    "cybersource",
+    "mpgs",
+    "mastercard",
+    "visa",
+    "stripe",
+    "adyen",
+    "3ds",
+    "mcp",
+    "model-context-protocol",
+    "orchestration",
+    "agents",
+    "skills",
+    "ultrathink"
+  ],
+  "author": "YOUSSEFELJAYAD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YOUSSEFELJAYAD/mcp-config-master/issues"
+  },
+  "homepage": "https://github.com/YOUSSEFELJAYAD/mcp-config-master#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "files": [
+    "master/",
+    "templates/",
+    "scripts/validate-config.js",
+    "plugin.json",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "markdownlint-cli2": "^0.12.0",
+    "typescript": "^5.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,7 +1,34 @@
 {
   "permissions": {
     "allow": [
-      "Bash(bun x tsx:*)"
+      "Bash(bun x tsx:*)",
+      "Bash(bun test:*)",
+      "Bash(bun run:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf .:*)",
+      "Bash(> /dev/sda:*)",
+      "Bash(mkfs:*)",
+      "Bash(dd if=:*)",
+      "Bash(:(){ :|:& };::*)",
+      "Bash(curl * | sh:*)",
+      "Bash(curl * | bash:*)",
+      "Bash(wget * | sh:*)",
+      "Bash(wget * | bash:*)",
+      "Bash(chmod 777:*)",
+      "Bash(sudo rm:*)",
+      "Bash(sudo chmod:*)"
     ]
   },
   "hooks": {

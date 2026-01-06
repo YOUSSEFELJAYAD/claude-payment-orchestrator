@@ -1,0 +1,45 @@
+{
+  "name": "payment",
+  "version": "1.0.0",
+  "description": "Payment systems development module with PSP integrations, 3DS, tokenization, and PCI compliance",
+  "domain": "fintech",
+  "dependencies": ["core"],
+  "agents": [
+    "payment-integration",
+    "visa-cybersource-payments",
+    "mastercard-mpgs-specialist"
+  ],
+  "skills": [
+    "payment-orchestration",
+    "scaffold-payment-form",
+    "tokenize-card-data",
+    "process-refund-flow",
+    "render-3ds-challenge",
+    "calculate-transaction-fees",
+    "manage-payment-session",
+    "build-payment-link-page",
+    "integrate-mpgs-gateway",
+    "integrate-visa-cybersource",
+    "psp-integration",
+    "handle-webhook-event",
+    "mock-psp-response",
+    "generate-3ds-payload",
+    "diagnose-mpgs-failure",
+    "diagnose-cybersource-failure",
+    "normalize-payment-status",
+    "display-routing-indicator",
+    "evaluate-routing-rules",
+    "animate-processing-state"
+  ],
+  "commands": ["payment"],
+  "keywords": [
+    "payment",
+    "stripe",
+    "adyen",
+    "cybersource",
+    "mpgs",
+    "3ds",
+    "pci",
+    "tokenization"
+  ]
+}

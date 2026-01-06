@@ -21,6 +21,9 @@ USER REQUEST → Classify → Select Skills → Choose MCPs → Invoke Superpowe
 | API design | `api-development` | `api-designer` | Context7, Serena |
 | Security audit | `security-compliance` | `security-auditor` | Serena, Episodic Memory |
 | E2E testing | `testing` | `playwright-testing` | Playwright, Chrome |
+| Complex analysis | `think-hard` | `Explore` | Serena, Context7, Episodic Memory |
+| Deep investigation | `think-harder` | `Explore`, `Plan` | ALL MCP + Playwright |
+| Maximum reasoning | `ultrathink` | Agent Swarm (6+) | ALL MCP + ALL Agents |
 
 ### Always Do Before Starting
 
@@ -47,8 +50,10 @@ This is a **master configuration repository for Claude Code**, containing a comp
 ```
 master/
 ├── settings.json      # Permissions config
-├── agents/            # 15 specialized agent definitions
-├── skills/            # 45 domain-specific skills (including claude-code-workflow)
+├── agents/            # 28 specialized agent definitions
+├── skills/            # 68 domain-specific skills (including thinking tiers)
+├── commands/          # 14 slash commands
+├── hooks/             # 2 hooks (session, verification)
 └── tasks/             # Task execution directory
 ```
 
@@ -74,21 +79,75 @@ master/
 | `subagent-driven-development` | For parallel independent tasks |
 | `requesting-code-review` | After significant code changes |
 
-## Agents (15)
+## Enhanced Thinking System (3 Tiers)
+
+Activate enhanced reasoning with progressive power levels:
+
+| Command | Tier | Power Level | Use When |
+|---------|------|-------------|----------|
+| `think hard` | 1 | Foundation | Complex questions, architecture decisions, understanding code |
+| `think harder` | 2 | Intensive | Debugging, major features, multi-component analysis |
+| `ultrathink` | 3 | Maximum | Architecture redesigns, critical issues, major planning |
+
+### Tier Capabilities Matrix
+
+| Capability | think-hard | think-harder | ultrathink |
+|------------|:----------:|:------------:|:----------:|
+| **Knowledge Gathering** |
+| Episodic Memory Search | ✅ | ✅ | ✅ |
+| Context7 Docs | ✅ | ✅ | ✅ |
+| Serena Code Analysis | ✅ | ✅ | ✅ |
+| TodoWrite Planning | ✅ | ✅ | ✅ |
+| Web Search | ❌ | ❌ | ✅ |
+| **Agent Deployment** |
+| Single Explore Agent | ✅ | ✅ | ✅ |
+| Parallel Agents (3+) | ❌ | ✅ | ✅ |
+| Agent Swarm (6+) | ❌ | ❌ | ✅ |
+| Code Review Suite | ❌ | ❌ | ✅ |
+| **Superpowers Skills** |
+| Writing-Plans | ❌ | ✅ | ✅ |
+| Systematic-Debugging | ❌ | ✅ | ✅ |
+| Brainstorming | ❌ | ❌ | ✅ |
+| ALL Superpowers | ❌ | ❌ | ✅ |
+| **Browser Testing** |
+| Playwright Testing | ❌ | ✅ | ✅ |
+| Chrome Live Monitoring | ❌ | ❌ | ✅ |
+| **Verification** |
+| Basic Verification | ✅ | ✅ | ✅ |
+| Multi-Phase Verification | ❌ | ❌ | ✅ |
+| Memory Write-Back | ❌ | ❌ | ✅ |
+
+### Quick Usage
+
+```
+User: think hard about how to implement retry logic
+→ Tier 1: Memory + Docs + Code Analysis + Explore Agent
+
+User: think harder about why payments are failing
+→ Tier 2: All of Tier 1 + Parallel Agents + Debugging + Playwright
+
+User: ultrathink about redesigning the payment system
+→ Tier 3: ALL capabilities at maximum power
+```
+
+## Agents (28)
 
 Agents are MCP-integrated specialists with linked skills:
 
 | Category | Agents |
 |----------|--------|
-| **Payment Domain** | `visa-cybersource-payments`, `mastercard-mpgs-specialist`, `payment-integration` |
-| **Development** | `fullstack-developer`, `frontend-developer`, `nextjs-developer`, `api-designer`, `api-documenter` |
+| **Payment Domain** | `visa-cybersource-payments`, `mastercard-mpgs-specialist`, `stripe-payments-specialist`, `paypal-payments-specialist`, `adyen-payments-specialist`, `square-payments-specialist`, `payment-integration`, `3ds-flow-specialist` |
+| **Fraud & Compliance** | `fraud-prevention-specialist`, `pci-compliance-specialist`, `webhook-orchestrator` |
+| **Development** | `fullstack-developer`, `frontend-developer`, `nextjs-developer`, `api-designer`, `api-documenter`, `github-integration-specialist` |
 | **Security** | `security-auditor`, `penetration-tester` |
 | **Testing & UI** | `playwright-testing`, `shadcn-ui-architect` |
-| **Infrastructure** | `sequential-reasoner`, `memory-context-manager`, `agent-mcp-discovery` |
+| **Infrastructure** | `sequential-reasoner`, `memory-context-manager`, `agent-mcp-discovery`, `agent-organizer`, `error-recovery-specialist` |
+| **Database** | `database-specialist` |
+| **DevOps** | `devops-engineer` |
 
-## Skills (45)
+## Skills (68)
 
-### Payment Skills
+### Payment Skills (20)
 | Skill | Use When |
 |-------|----------|
 | `payment-orchestration` | Designing payment flows, PSP coordination |
@@ -96,11 +155,46 @@ Agents are MCP-integrated specialists with linked skills:
 | `tokenize-card-data` | Card tokenization, PCI scope |
 | `process-refund-flow` | Refund logic |
 | `render-3ds-challenge` | 3DS authentication UI |
+| `implement-3ds-flow` | Complete 3DS authentication |
 | `integrate-mpgs-gateway` | Mastercard MPGS |
 | `integrate-visa-cybersource` | Visa CyberSource |
+| `integrate-stripe-full` | Stripe Payment Intents, Subscriptions |
+| `integrate-paypal-full` | PayPal Orders API |
+| `integrate-adyen-gateway` | Adyen Sessions API |
+| `integrate-square-payments` | Square Web Payments SDK |
+| `integrate-apple-pay` | Apple Pay JS |
+| `integrate-google-pay` | Google Pay Web API |
 | `psp-integration` | Generic PSP patterns |
+| `handle-payment-errors` | Error categorization, retry strategies |
 
-### Development Skills
+### Webhook Skills (4)
+| Skill | Use When |
+|-------|----------|
+| `handle-webhook-event` | Processing incoming webhooks |
+| `implement-webhook-reliability` | Retry, circuit breakers, DLQ |
+| `manage-event-queuing` | Message queue configuration |
+| `validate-webhook-signatures` | HMAC signature validation |
+
+### Fraud & Risk Skills (3)
+| Skill | Use When |
+|-------|----------|
+| `analyze-fraud-signals` | Fraud signal analysis |
+| `implement-risk-scoring` | Risk scoring models |
+| `manage-fraud-rules` | Fraud rules engine |
+
+### Security Skills (10)
+| Skill | Use When |
+|-------|----------|
+| `security-compliance` | PCI DSS compliance |
+| `verify-pci-scope` | Scope assessment |
+| `audit-access-logs` | Log analysis |
+| `configure-waf-rules` | WAF configuration |
+| `audit-cardholder-environment` | CDE audit |
+| `validate-encryption-standards` | Encryption validation |
+| `certify-pci-readiness` | PCI certification |
+| `rotate-encryption-keys` | Key rotation |
+
+### Development Skills (8)
 | Skill | Use When |
 |-------|----------|
 | `api-development` | API design and implementation |
@@ -108,20 +202,21 @@ Agents are MCP-integrated specialists with linked skills:
 | `database-operations` | Schema, migrations |
 | `testing` | Test strategy |
 | `saga-management` | Distributed transactions |
+| `github-workflow` | Git/GitHub best practices |
 
-### Security Skills
-| Skill | Use When |
-|-------|----------|
-| `security-compliance` | PCI DSS compliance |
-| `verify-pci-scope` | Scope assessment |
-| `audit-access-logs` | Log analysis |
-| `configure-waf-rules` | WAF configuration |
-
-### Meta Skills
+### Meta & Session Skills (3)
 | Skill | Use When |
 |-------|----------|
 | `claude-code-workflow` | **EVERY REQUEST** - Master routing |
 | `utilize-mcp-agent` | MCP tool reference |
+| `checkpoint-management` | Save/restore task state |
+
+### Enhanced Thinking Skills (3)
+| Skill | Use When |
+|-------|----------|
+| `think-hard` | Complex questions, need careful analysis (Tier 1) |
+| `think-harder` | Debugging, major features, parallel investigation (Tier 2) |
+| `ultrathink` | Maximum power: architecture, critical issues, full analysis (Tier 3) |
 
 ## Session & Context Management (NON-NEGOTIABLE)
 

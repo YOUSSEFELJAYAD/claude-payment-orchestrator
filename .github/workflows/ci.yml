@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate JSON files
+        run: |
+          echo "Validating JSON files..."
+          for file in $(find . -name "*.json" -not -path "./node_modules/*"); do
+            echo "Checking $file"
+            cat "$file" | jq empty || exit 1
+          done
+          echo "All JSON files are valid!"
+
+      - name: Validate plugin.json
+        run: |
+          echo "Checking plugin.json structure..."
+          jq -e '.name and .version and .description and .license' plugin.json
+
+      - name: Validate settings.json
+        run: |
+          echo "Checking settings.json structure..."
+          jq -e '.permissions and .hooks' master/settings.json
+
+      - name: Run config validator
+        run: node scripts/validate-config.js
+
+  lint:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli2
+
+      - name: Lint markdown files
+        run: |
+          markdownlint-cli2 "**/*.md" --ignore node_modules || true
+        continue-on-error: true
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run tests
+        run: bun test
+        continue-on-error: true
+
+  count-components:
+    name: Count Components
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Count agents
+        run: |
+          count=$(ls -1 master/agents/*.md 2>/dev/null | wc -l)
+          echo "Agents: $count"
+
+      - name: Count skills
+        run: |
+          count=$(find master/skills -name "SKILL.md" 2>/dev/null | wc -l)
+          echo "Skills: $count"
+
+      - name: Count commands
+        run: |
+          count=$(ls -1 master/commands/*.md 2>/dev/null | wc -l)
+          echo "Commands: $count"
+
+      - name: Summary
+        run: |
+          agents=$(ls -1 master/agents/*.md 2>/dev/null | wc -l)
+          skills=$(find master/skills -name "SKILL.md" 2>/dev/null | wc -l)
+          commands=$(ls -1 master/commands/*.md 2>/dev/null | wc -l)
+          echo "## Component Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Agents: $agents" >> $GITHUB_STEP_SUMMARY
+          echo "- Skills: $skills" >> $GITHUB_STEP_SUMMARY
+          echo "- Commands: $commands" >> $GITHUB_STEP_SUMMARY

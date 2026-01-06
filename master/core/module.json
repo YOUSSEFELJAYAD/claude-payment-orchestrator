@@ -1,0 +1,52 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "description": "Core module with thinking tiers, workflow orchestration, and essential agents - always installed",
+  "domain": "core",
+  "dependencies": [],
+  "required": true,
+  "agents": [
+    "agent-organizer",
+    "sequential-reasoner",
+    "memory-context-manager",
+    "agent-mcp-discovery",
+    "fullstack-developer",
+    "api-designer",
+    "api-documenter",
+    "playwright-testing",
+    "database-specialist",
+    "devops-engineer"
+  ],
+  "skills": [
+    "think-hard",
+    "think-harder",
+    "ultrathink",
+    "claude-code-workflow",
+    "utilize-mcp-agent",
+    "enforce-claude-rules",
+    "api-development",
+    "database-operations",
+    "testing",
+    "saga-management",
+    "deploy-canary-release",
+    "dev-browser",
+    "integrate-web-search-capability",
+    "monitor-transaction-latency"
+  ],
+  "commands": [
+    "workflow",
+    "think",
+    "debug",
+    "api",
+    "testing",
+    "saveContext",
+    "restoreContext"
+  ],
+  "keywords": [
+    "core",
+    "workflow",
+    "thinking",
+    "orchestration",
+    "mcp"
+  ]
+}

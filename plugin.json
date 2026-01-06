@@ -1,0 +1,93 @@
+{
+  "name": "claude-payment-orchestrator",
+  "version": "1.1.0",
+  "description": "Comprehensive Claude Code plugin for payment systems development with 28 specialized agents, 68 skills, modular architecture, MCP mock framework, and 3-tier thinking system",
+  "author": "YOUSSEFELJAYAD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUSSEFELJAYAD/mcp-config-master"
+  },
+  "homepage": "https://github.com/YOUSSEFELJAYAD/mcp-config-master#readme",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "payment",
+    "pci-dss",
+    "cybersource",
+    "mpgs",
+    "3ds",
+    "stripe",
+    "adyen",
+    "orchestration",
+    "mcp",
+    "ultrathink",
+    "modular"
+  ],
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "categories": [
+    "payments",
+    "security",
+    "development",
+    "testing"
+  ],
+  "main": "master/",
+  "agents": "master/agents/",
+  "skills": "master/skills/",
+  "commands": "master/commands/",
+  "hooks": "master/hooks/",
+  "settings": "master/settings.json",
+  "capabilities": {
+    "agents": 28,
+    "skills": 68,
+    "commands": 14,
+    "hooks": 2
+  },
+  "modules": {
+    "core": {
+      "path": "master/core/",
+      "required": true,
+      "description": "Essential components including thinking tiers and workflow orchestration"
+    },
+    "payment": {
+      "path": "master/modules/payment/",
+      "required": false,
+      "description": "Payment processing, PSP integration, 3DS, tokenization"
+    },
+    "security": {
+      "path": "master/modules/security/",
+      "required": false,
+      "description": "PCI DSS compliance, security auditing, penetration testing"
+    },
+    "frontend": {
+      "path": "master/modules/frontend/",
+      "required": false,
+      "description": "React, Next.js, Tailwind, Shadcn UI development"
+    }
+  },
+  "mcpServers": {
+    "required": [
+      "serena",
+      "context7"
+    ],
+    "optional": [
+      "playwright",
+      "chrome",
+      "episodic-memory"
+    ]
+  },
+  "thinkingTiers": {
+    "think-hard": "Tier 1: Foundation reasoning with MCP tools",
+    "think-harder": "Tier 2: Intensive reasoning with parallel agents",
+    "ultrathink": "Tier 3: Maximum power with full agent swarm"
+  },
+  "scaffolding": {
+    "templates": "templates/",
+    "commands": ["/new-agent", "/new-skill", "/new-command"]
+  },
+  "testing": {
+    "mocks": "tests/mcp-mocks/",
+    "framework": "bun test"
+  }
+}

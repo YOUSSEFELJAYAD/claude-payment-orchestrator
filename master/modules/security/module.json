@@ -1,0 +1,32 @@
+{
+  "name": "security",
+  "version": "1.0.0",
+  "description": "Security and compliance module with PCI DSS, penetration testing, WAF configuration, and audit capabilities",
+  "domain": "security",
+  "dependencies": ["core"],
+  "agents": [
+    "security-auditor",
+    "penetration-tester"
+  ],
+  "skills": [
+    "security-compliance",
+    "verify-pci-scope",
+    "audit-access-logs",
+    "configure-waf-rules",
+    "rotate-encryption-keys",
+    "blackhole-suspicious-ip",
+    "detect-velocity-attack",
+    "perform-penetration-test",
+    "provision-pci-environment"
+  ],
+  "commands": ["security"],
+  "keywords": [
+    "security",
+    "pci-dss",
+    "compliance",
+    "audit",
+    "waf",
+    "penetration-testing",
+    "encryption"
+  ]
+}

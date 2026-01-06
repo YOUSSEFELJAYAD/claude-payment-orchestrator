@@ -1,0 +1,30 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend development module with React, Next.js, Tailwind, and Shadcn UI expertise",
+  "domain": "frontend",
+  "dependencies": ["core"],
+  "agents": [
+    "frontend-developer",
+    "nextjs-developer",
+    "shadcn-ui-architect"
+  ],
+  "skills": [
+    "frontend-development",
+    "validate-card-input-ui",
+    "render-transaction-table",
+    "display-toast-notification",
+    "render-expired-link-state",
+    "handle-mobile-keyboard"
+  ],
+  "commands": ["frontend"],
+  "keywords": [
+    "react",
+    "nextjs",
+    "tailwind",
+    "shadcn",
+    "ui",
+    "components",
+    "forms"
+  ]
+}
