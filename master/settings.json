@@ -64,17 +64,6 @@
         ]
       }
     ],
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "SESSION INIT: 1) Restore .claude/tasks/context_session_latest.md if exists 2) Search Episodic Memory 3) Report status. Master workflow ACTIVE per CLAUDE.md."
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Write|Edit",
