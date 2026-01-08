@@ -39,18 +39,19 @@ The hooks in `settings.json` are lightweight triggers. **ALL detailed instructio
 
 **FAILURE TO FOLLOW = VIOLATION**
 
-### On `SessionStart`
+### On `SessionStart` (startup/resume)
 
-1. **CHECK** `.claude/tasks/context_session_latest.md`
-   - If EXISTS: Read IMMEDIATELY, restore state, report to user
-   - If NOT: Report "No previous context. Starting fresh."
+**On startup:**
+1. Execute `/restoreContext` to restore previous session state
+2. Use `think-hard` to analyze what needs to be done next
+3. Start working on the next task immediately
 
-2. **SEARCH** Episodic Memory for past relevant decisions
+**On resume:**
+1. Read `.claude/tasks/context_session_latest.md`
+2. Use `think-hard` to analyze current state
+3. Continue from where you left off
 
-3. **REPORT** to user:
-   - Session status (restored/fresh)
-   - Relevant past context found
-   - "Master workflow ACTIVE for all requests"
+**Always:** Master workflow ACTIVE per CLAUDE.md
 
 ### On `PreToolUse` (Write|Edit)
 

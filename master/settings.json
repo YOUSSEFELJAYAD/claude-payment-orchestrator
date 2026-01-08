@@ -53,6 +53,26 @@
     ]
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"additionalContext\":\"SESSION START: 1) Execute /restoreContext to restore previous session state 2) Use think-hard to analyze what needs to be done next 3) Start working on the next task. Master workflow ACTIVE per CLAUDE.md.\"}}'"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"additionalContext\":\"SESSION RESUMED: 1) Read .claude/tasks/context_session_latest.md 2) Use think-hard to analyze current state 3) Continue from where you left off. Master workflow ACTIVE per CLAUDE.md.\"}}'"
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "matcher": "*",
