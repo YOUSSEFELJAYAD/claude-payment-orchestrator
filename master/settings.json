@@ -1,66 +1,76 @@
 {
   "permissions": {
     "allow": [
-      "Bash(bun x tsx:*)",
-      "Bash(bun test:*)",
+      "Bash(bun:*)",
       "Bash(bun run:*)",
-      "Bash(npm test:*)",
+      "Bash(bun test:*)",
+      "Bash(bun x:*)",
+      "Bash(npm:*)",
       "Bash(npm run:*)",
+      "Bash(npm test:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
       "Bash(git status:*)",
       "Bash(git diff:*)",
       "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(node:*)",
-      "Bash(npx:*)"
+      "Bash(git stash:*)",
+      "Bash(gh:*)",
+      "Bash(vitest:*)",
+      "Bash(jest:*)",
+      "Bash(playwright:*)",
+      "Bash(tsc:*)",
+      "Bash(eslint:*)",
+      "Bash(prettier:*)",
+      "Bash(ls:*)",
+      "Bash(pwd:*)",
+      "Bash(which:*)",
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)"
     ],
     "deny": [
-      "Bash(rm -rf /:*)",
-      "Bash(rm -rf ~:*)",
-      "Bash(rm -rf .:*)",
-      "Bash(> /dev/sda:*)",
+      "Bash(rm -rf:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
       "Bash(mkfs:*)",
-      "Bash(dd if=:*)",
-      "Bash(:(){ :|:& };::*)",
+      "Bash(dd:*)",
+      "Bash(> /dev:*)",
       "Bash(curl * | sh:*)",
       "Bash(curl * | bash:*)",
       "Bash(wget * | sh:*)",
-      "Bash(wget * | bash:*)",
-      "Bash(chmod 777:*)",
-      "Bash(sudo rm:*)",
-      "Bash(sudo chmod:*)"
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/secrets/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)"
     ]
   },
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "WORKFLOW TRIGGER: Execute MASTER WORKFLOW from CLAUDE.md. Classify → Select Skills → Choose MCPs → Check Thinking Tier → Execute 4-Phase. VIOLATION = FAILURE."
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
-        "matcher": "",
+        "matcher": ".*",
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "SESSION START - AUTO RESTORE:\n\n1. CHECK if .claude/tasks/context_session_latest.md exists\n2. If YES: Read it and restore session state, report status to user\n3. If NO: Inform user no previous context found\n\nThen apply MASTER WORKFLOW:\n- CLASSIFY request domain (payment/security/frontend/api/testing)\n- SELECT skills from 46 available\n- CHOOSE MCPs (Serena/Context7/Playwright/Chrome/Episodic Memory)\n- INVOKE Superpowers (brainstorming/TDD/debugging/verification)\n- EXECUTE 4-phase workflow: Discovery → Implementation → Testing → Review\n\nALWAYS check Episodic Memory for past decisions before starting any task."
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "AUTO-SAVE BEFORE COMPACT:\n\n1. IMMEDIATELY save session state to .claude/tasks/context_session_latest.md\n2. Include: current state, completed work, pending work, next step, decisions, files modified\n3. DO NOT ask user - just save and proceed\n4. After compact completes, you MUST read .claude/tasks/context_session_latest.md to restore full context\n\nProceed with compact after saving."
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "POST-COMPACT AUTO-RESTORE:\n\nCompact completed. IMMEDIATELY:\n1. Read .claude/tasks/context_session_latest.md\n2. Restore full session context from saved state\n3. Report to user: 'Context restored after compact. Continuing from: [next step]'\n4. Continue working on the task seamlessly\n\nDo NOT ask permission - just restore and continue."
+            "prompt": "SESSION INIT: 1) Restore .claude/tasks/context_session_latest.md if exists 2) Search Episodic Memory 3) Report status. Master workflow ACTIVE per CLAUDE.md."
           }
         ]
       }
@@ -71,18 +81,29 @@
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "CODE WORKFLOW CHECK:\n- Did you invoke relevant skill? (payment-orchestration, frontend-development, api-development, etc.)\n- Did you check Context7 for latest documentation?\n- Did you invoke brainstorming or test-driven-development if appropriate?\n- Are you following the 4-phase workflow?"
+            "prompt": "CODE GATE: Verify Context7 docs checked + relevant skill invoked per CLAUDE.md. Proceed if compliant."
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "SAVE STATE: Execute /saveContext NOW per CLAUDE.md. MANDATORY."
           }
         ]
       }
     ],
     "Stop": [
       {
-        "matcher": "",
+        "matcher": ".*",
         "hooks": [
           {
             "type": "prompt",
-            "prompt": "COMPLETION CHECKLIST:\n- Did you invoke verification-before-completion skill?\n- Did you run actual commands to verify (tests, build, lint)?\n- Did you store learnings in Serena memory?\n- Did you request code review for significant changes?\n- Consider running /saveContext if this is a good checkpoint."
+            "prompt": "COMPLETION GATE: Verify per CLAUDE.md - tests run, build passed, learnings stored. Return 'approve' or 'block' with reason."
           }
         ]
       }

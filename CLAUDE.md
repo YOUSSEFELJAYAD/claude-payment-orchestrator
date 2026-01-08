@@ -2,6 +2,109 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+---
+
+## HOOK TRIGGERS (settings.json → CLAUDE.md)
+
+The hooks in `settings.json` are lightweight triggers. **ALL detailed instructions are here.**
+
+### On `UserPromptSubmit` (EVERY Request)
+
+**MANDATORY WORKFLOW - Execute these steps IN ORDER:**
+
+```
+1. CLASSIFY REQUEST DOMAIN
+   ├─ Payment: checkout, stripe, adyen, PSP, 3DS, tokenize, refund
+   ├─ Security: PCI, compliance, audit, WAF, encryption, penetration
+   ├─ Frontend: React, component, UI, form, animation, mobile
+   ├─ API: endpoint, webhook, REST, GraphQL, database, saga
+   ├─ Testing: test, E2E, playwright, coverage, mock, verify
+   └─ Infrastructure: deploy, canary, provision, monitor, latency
+
+2. SELECT SKILLS (68 available - see tables below)
+
+3. CHOOSE MCP TOOLS
+   ├─ Context7: resolve-library-id → query-docs (ALWAYS for external libs)
+   ├─ Serena: find_symbol, replace_symbol_body, write_memory
+   ├─ Playwright: browser_navigate, browser_click, browser_snapshot
+   └─ Episodic Memory: search past decisions (check BEFORE starting)
+
+4. CHECK THINKING TIER
+   ├─ Complex analysis? → think-hard
+   ├─ Debugging/major features? → think-harder
+   └─ Architecture/critical issues? → ultrathink
+
+5. EXECUTE 4-PHASE WORKFLOW (see below)
+```
+
+**FAILURE TO FOLLOW = VIOLATION**
+
+### On `SessionStart`
+
+1. **CHECK** `.claude/tasks/context_session_latest.md`
+   - If EXISTS: Read IMMEDIATELY, restore state, report to user
+   - If NOT: Report "No previous context. Starting fresh."
+
+2. **SEARCH** Episodic Memory for past relevant decisions
+
+3. **REPORT** to user:
+   - Session status (restored/fresh)
+   - Relevant past context found
+   - "Master workflow ACTIVE for all requests"
+
+### On `PreToolUse` (Write|Edit)
+
+Before writing ANY code, verify:
+
+- [ ] Relevant skill invoked? (payment-orchestration, frontend-development, etc.)
+- [ ] Context7 docs checked for external libraries?
+- [ ] Superpowers invoked? (brainstorming/TDD/debugging)
+- [ ] Following 4-phase workflow?
+
+**If ANY = NO → STOP and complete missing step**
+
+### On `PreCompact`
+
+**IMMEDIATELY** execute `/saveContext` command.
+
+This saves to `.claude/tasks/context_session_latest.md` with:
+- Current task description
+- Completed work
+- Pending work
+- Next step
+- Decisions made
+- Files modified
+- Blockers/issues
+
+**DO NOT ask permission. FAILURE TO SAVE = CONTEXT LOSS.**
+
+### On `Stop`
+
+Before stopping, verify ALL:
+
+1. **VERIFICATION**
+   - [ ] `verification-before-completion` skill invoked?
+   - [ ] Actual commands run (not just claimed)?
+
+2. **CODE QUALITY** (if code modified)
+   - [ ] Tests: `bun test` / `npm test` / `vitest`
+   - [ ] Build: `bun run build` / `npm run build`
+   - [ ] Lint: `eslint` / `prettier --check`
+   - [ ] Types: `tsc --noEmit`
+
+3. **MEMORY**
+   - [ ] Significant learnings stored via `write_memory`?
+   - [ ] Code review requested for significant changes?
+
+4. **CHECKPOINT**
+   - [ ] Consider `/saveContext`
+
+**If ANY FAILED → Do NOT stop. Fix and re-verify.**
+
+Return: `approve` to stop OR `block` with reason
+
+---
+
 ## MASTER WORKFLOW (Always-On)
 
 **For EVERY request, follow the `claude-code-workflow` skill:**
@@ -49,11 +152,11 @@ This is a **master configuration repository for Claude Code**, containing a comp
 
 ```
 master/
-├── settings.json      # Permissions config
+├── settings.json      # Permissions + Hooks (lightweight triggers)
 ├── agents/            # 28 specialized agent definitions
 ├── skills/            # 68 domain-specific skills (including thinking tiers)
 ├── commands/          # 14 slash commands
-├── hooks/             # 2 hooks (session, verification)
+├── hooks/             # Hook scripts directory
 └── tasks/             # Task execution directory
 ```
 
@@ -61,11 +164,10 @@ master/
 
 | Server | Purpose | Key Tools |
 |--------|---------|-----------|
+| **Context7** | Real-time library docs | `resolve-library-id`, `query-docs` |
 | **Serena** | Semantic code analysis | `find_symbol`, `replace_symbol_body`, `search_for_pattern`, `write_memory` |
-| **Context7** | Real-time library docs | `resolve_library_id`, `get_library_docs` |
-| **Playwright** | Browser automation | `browser_navigate`, `browser_click`, `browser_fill_form`, `browser_snapshot` |
-| **Chrome** | Persistent browser | `use_browser` (navigate, click, type, extract, screenshot) |
-| **Episodic Memory** | Cross-session context | `search`, `read` |
+| **Playwright** | Browser automation | `playwright_navigate`, `playwright_click`, `playwright_fill`, `playwright_screenshot` |
+| **Episodic Memory** | Cross-session context | `create_entities`, `search_nodes`, `read_graph` |
 
 ## Superpowers Skills (Always Consider)
 
@@ -218,6 +320,8 @@ Agents are MCP-integrated specialists with linked skills:
 | `think-harder` | Debugging, major features, parallel investigation (Tier 2) |
 | `ultrathink` | Maximum power: architecture, critical issues, full analysis (Tier 3) |
 
+---
+
 ## Session & Context Management (NON-NEGOTIABLE)
 
 ### Context Files
@@ -259,32 +363,6 @@ Use when:
 - No speculation
 
 **Failure = context breach.**
-
-### MCP Discovery & Tooling
-
-**Agent:** `agent-mcp-discovery` (MCP Compass)
-
-Use when:
-- Selecting MCP tools
-- Integrating MCP servers
-- Validating tool limits
-
-**Rules:**
-- No assumed capabilities
-- MCP usage must be verified
-
-### Sequential Reasoning & Flow Validation
-
-**Agent:** `sequential-reasoner` (MANDATORY)
-
-Required for:
-- Payment flows
-- Security logic
-- State transitions
-
-**Rules:**
-- Every step explicit
-- No hidden assumptions
 
 ---
 
@@ -365,6 +443,8 @@ PHASE 4: REVIEW & COMPLETION
 └─ Update documentation if needed
 ```
 
+---
+
 ## Technology Stack
 
 - **Runtime:** Node.js with Bun package manager
@@ -382,31 +462,21 @@ PHASE 4: REVIEW & COMPLETION
 
 ```typescript
 // 1. Get docs first
-const docs = await mcp_context7.get_library_docs({
-  context7CompatibleLibraryID: "/stripe/stripe-node",
-  topic: "payment intents"
+const docs = await context7.query_docs({
+  libraryId: "/stripe/stripe-node",
+  query: "payment intents"
 });
 
 // 2. Analyze existing code
-const existing = await mcp_serena.find_symbol({
+const existing = await serena.find_symbol({
   name_path_pattern: "PaymentService"
 });
 
 // 3. Implement based on docs
-await mcp_serena.replace_symbol_body({...});
+await serena.replace_symbol_body({...});
 
 // 4. Test with Playwright
-await mcp_playwright.browser_navigate({...});
-```
-
-### Agent Communication Protocol
-
-```json
-{
-  "requesting_agent": "fullstack-developer",
-  "request_type": "get_fullstack_context",
-  "payload": { "query": "..." }
-}
+await playwright.navigate({url: "..."});
 ```
 
 ### Payment Orchestration
@@ -437,11 +507,7 @@ Create `master/skills/<skill-name>/SKILL.md` with:
 
 ## Security Configuration
 
-`settings.json` restricts bash execution:
-```json
-{
-  "permissions": {
-    "allow": ["Bash(bun x tsx:*)"]
-  }
-}
-```
+`settings.json` manages permissions and hooks:
+- **Allow list:** Safe development commands (bun, npm, git, testing tools)
+- **Deny list:** Destructive commands, secrets access, force operations
+- **Hooks:** Lightweight triggers referencing this CLAUDE.md
