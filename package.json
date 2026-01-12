@@ -57,7 +57,7 @@
     "@types/bun": "latest",
     "@types/node": "^20.0.0",
     "markdownlint-cli2": "^0.12.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.9.3"
   },
   "publishConfig": {
     "access": "public"
